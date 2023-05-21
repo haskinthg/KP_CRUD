@@ -1,4 +1,4 @@
-#include "view/mainwindow.h"
+#include "mainwindow.h"
 
 #include "stable.h"
 

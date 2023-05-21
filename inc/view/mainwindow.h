@@ -3,7 +3,11 @@
 
 #include "stable.h"
 
+#include "addnewdialog.h"
+#include "commonwindow.h"
 #include "database.h"
+
+#define dbManager DbManager::instance()
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,10 +24,15 @@ public:
 private slots:
     void on_login_clicked();
     void on_registration_clicked();
+    void on_close_Dialog();
 
 
 private:
     Ui::MainWindow *ui;
     Database& db = Database::instance();
+    AddNewDialog* dialog;
+    CommonWindow* main;
+    QString login;
+    QString password;
 };
 #endif // MAINWINDOW_H

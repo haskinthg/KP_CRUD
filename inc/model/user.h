@@ -3,11 +3,12 @@
 
 #include "stable.h"
 
-class User
+#include <base.h>
+
+class User: public Base
 {
 public:
-    User(): id(0) {}
-    long id;
+    User() {}
     QString fname;
     QString lname;
     QString login;

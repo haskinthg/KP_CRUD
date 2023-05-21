@@ -6,35 +6,39 @@ TARGET = CRUD_APP
 
 CONFIG += c++20
 
-# You can make your code fail to compile if it uses deprecated APIs.
-# In order to do so, uncomment the following line.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
 PRECOMPILED_HEADER += inc/stable.h
 
 SOURCES += \
+    src/model/base.cpp \
+    src/view/commonwindow.cpp \
     src/DbManager.cpp \
     src/database.cpp \
     src/main.cpp \
+    src/view/addnewdialog.cpp \
     src/view/mainwindow.cpp \
     src/model/user.cpp
 
 HEADERS += \
+    inc/model/base.h \
+    inc/view/commonwindow.h \
     inc/DbManager.h \
     inc/Singleton.h \
     inc/database.h \
     inc/stable.h \
+    inc/view/addnewdialog.h \
     inc/view/mainwindow.h \
     inc/model/user.h
 
 FORMS += \
+    forms/commonwindow.ui \
+    forms/addnew.ui \
     forms/mainwindow.ui
 
 INCLUDEPATH +=\
     inc \
+    inc/model \
+    inc/view \
 
-
-# Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
@@ -47,5 +51,3 @@ QMAKE_EXTRA_TARGETS += first copydata
 
 DISTFILES += \
     database.conf
-
-RESOURCES +=

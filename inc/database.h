@@ -4,12 +4,23 @@
 #include "Singleton.h"
 #include "stable.h"
 
+#include <user.h>
+
 class Database: public Singleton<Database>
 {
 public:
     Database();
     bool createConnection();
     void disconect();
+    bool createTableUsers();
+    bool createTableLicenses();
+    bool createTableProgram();
+    bool createTableLicensor();
+    bool createTableComputer();
+
+    bool login(QString, QString);
+    void addUser(User);
+
     QString lastError();
 
 private:

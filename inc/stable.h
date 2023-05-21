@@ -10,6 +10,8 @@
 #include <QSettings>
 #include <QString>
 #include <QSqlQuery>
+#include <QDialog>
+#include <QStyle>
 
 
 #endif // STABLE_H
