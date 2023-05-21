@@ -9,12 +9,10 @@ namespace Ui {
 class AddNewDialog;
 }
 
-class AddNewDialog : public QDialog
-{
+class AddNewDialog : public QDialog {
     Q_OBJECT
-
 public:
-    explicit AddNewDialog(QWidget *parent = nullptr);
+    explicit AddNewDialog(QWidget* parent = nullptr);
     ~AddNewDialog();
     User data;
 
@@ -22,7 +20,7 @@ private slots:
     void on_buttonBox_accepted();
 
 private:
-    Ui::AddNewDialog *ui;
+    Ui::AddNewDialog* ui;
 };
 
 #endif // ADDNEWDIALOG_H

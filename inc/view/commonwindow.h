@@ -7,12 +7,11 @@ namespace Ui {
 class CommonWindow;
 }
 
-class CommonWindow : public QMainWindow
-{
+class CommonWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit CommonWindow(QWidget *parent = nullptr);
+    explicit CommonWindow(QWidget* parent = nullptr);
     ~CommonWindow();
 
 private slots:
@@ -20,7 +19,7 @@ private slots:
     void logout();
 
 private:
-    Ui::CommonWindow *ui;
+    Ui::CommonWindow* ui;
 };
 
 #endif // COMMONWINDOW_H

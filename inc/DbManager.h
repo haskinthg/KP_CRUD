@@ -6,8 +6,7 @@
 
 #include <user.h>
 
-class DbManager: public Singleton<DbManager>
-{
+class DbManager : public Singleton<DbManager> {
 public:
     DbManager();
     bool connect();

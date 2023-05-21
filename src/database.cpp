@@ -1,9 +1,9 @@
 #include "database.h"
 
-
-Database::Database():Singleton<Database>(*this)
+Database::Database()
+    : Singleton<Database>(*this)
 {
-    QSettings config("database.conf", QSettings::IniFormat);
+    QSettings config("database.ini", QSettings::IniFormat);
     config.beginGroup("db");
     this->hostname = config.value("hostname").toString();
     this->dbname = config.value("db_name").toString();
@@ -28,33 +28,27 @@ bool Database::createConnection()
     db.close();
 
     db.setDatabaseName(this->dbname);
-    if(db.open()){
+    if (db.open()) {
         createTableLicenses();
         createTableUsers();
         createTableComputer();
         createTableLicensor();
         createTableProgram();
-    }
-    else return false;
+    } else
+        return false;
     return true;
 }
 
 void Database::disconect()
 {
-    if(db.isOpen())
+    if (db.isOpen())
         db.close();
 }
 
 bool Database::createTableUsers()
 {
     QSqlQuery query(db);
-    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS USERS(") +
-                          QString("ID SERIAL PRIMARY KEY,") +
-                          QString("FNAME VARCHAR,") +
-                          QString("LNAME VARCHAR, ") +
-                          QString("LOGIN VARCHAR, ") +
-                          QString("PASSWORD VARCHAR, ")+
-                          QString("UROLE VARCHAR)"));
+    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS USERS(") + QString("ID SERIAL PRIMARY KEY,") + QString("FNAME VARCHAR,") + QString("LNAME VARCHAR, ") + QString("LOGIN VARCHAR, ") + QString("PASSWORD VARCHAR, ") + QString("UROLE VARCHAR)"));
     qDebug() << query.lastError().text();
     return res;
 }
@@ -62,12 +56,7 @@ bool Database::createTableUsers()
 bool Database::createTableLicenses()
 {
     QSqlQuery query(db);
-    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS LICENSES(") +
-                          QString("ID SERIAL PRIMARY KEY,") +
-                          QString("START_L DATE,") +
-                          QString("END_L DATE,") +
-                          QString("PRICE INTEGER,") +
-                          QString("NAME VARCHAR)"));
+    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS LICENSES(") + QString("ID SERIAL PRIMARY KEY,") + QString("START_L DATE,") + QString("END_L DATE,") + QString("PRICE INTEGER,") + QString("NAME VARCHAR)"));
     qDebug() << query.lastError().text();
     return res;
 }
@@ -75,11 +64,7 @@ bool Database::createTableLicenses()
 bool Database::createTableProgram()
 {
     QSqlQuery query(db);
-    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS PROGRAMS(") +
-                          QString("ID SERIAL PRIMARY KEY,") +
-                          QString("NAME VARCHAR, ") +
-                          QString("LIC_ID INTEGER, ") +
-                          QString("FOREIGN KEY (LIC_ID) REFERENCES LICENSES(ID) ON DELETE CASCADE)"));
+    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS PROGRAMS(") + QString("ID SERIAL PRIMARY KEY,") + QString("NAME VARCHAR, ") + QString("LIC_ID INTEGER, ") + QString("FOREIGN KEY (LIC_ID) REFERENCES LICENSES(ID) ON DELETE CASCADE)"));
     qDebug() << query.lastError().text();
     return res;
 }
@@ -87,12 +72,7 @@ bool Database::createTableProgram()
 bool Database::createTableLicensor()
 {
     QSqlQuery query(db);
-    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS LICENSORS(") +
-                          QString("ID SERIAL PRIMARY KEY,") +
-                          QString("ADDRESS VARCHAR,") +
-                          QString("NAME VARCHAR, ") +
-                          QString("LIC_ID INTEGER, ") +
-                          QString("FOREIGN KEY (LIC_ID) REFERENCES LICENSES(ID) ON DELETE CASCADE)"));
+    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS LICENSORS(") + QString("ID SERIAL PRIMARY KEY,") + QString("ADDRESS VARCHAR,") + QString("NAME VARCHAR, ") + QString("LIC_ID INTEGER, ") + QString("FOREIGN KEY (LIC_ID) REFERENCES LICENSES(ID) ON DELETE CASCADE)"));
     qDebug() << query.lastError().text();
     return res;
 }
@@ -100,11 +80,7 @@ bool Database::createTableLicensor()
 bool Database::createTableComputer()
 {
     QSqlQuery query(db);
-    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS COMPUTERS(") +
-                          QString("ID SERIAL PRIMARY KEY,") +
-                          QString("NAME VARCHAR, ") +
-                          QString("LIC_ID INTEGER, ") +
-                          QString("FOREIGN KEY (LIC_ID) REFERENCES LICENSES(ID) ON DELETE CASCADE)"));
+    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS COMPUTERS(") + QString("ID SERIAL PRIMARY KEY,") + QString("NAME VARCHAR, ") + QString("LIC_ID INTEGER, ") + QString("FOREIGN KEY (LIC_ID) REFERENCES LICENSES(ID) ON DELETE CASCADE)"));
     qDebug() << query.lastError().text();
     return res;
 }
@@ -137,4 +113,3 @@ QString Database::lastError()
 {
     return db.lastError().text();
 }
-

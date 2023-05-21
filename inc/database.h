@@ -1,13 +1,12 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include <user.h>
+
 #include "Singleton.h"
 #include "stable.h"
 
-#include <user.h>
-
-class Database: public Singleton<Database>
-{
+class Database : public Singleton<Database> {
 public:
     Database();
     bool createConnection();

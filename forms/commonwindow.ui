@@ -38,14 +38,14 @@
      <string>Выход</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menu">
+   <widget class="QMenu" name="tables">
     <property name="title">
      <string>Таблицы</string>
     </property>
    </widget>
+   <addaction name="tables"/>
    <addaction name="queries"/>
    <addaction name="about"/>
-   <addaction name="menu"/>
    <addaction name="logout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

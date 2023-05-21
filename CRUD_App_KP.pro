@@ -10,6 +10,9 @@ PRECOMPILED_HEADER += inc/stable.h
 
 SOURCES += \
     src/model/base.cpp \
+    src/model/computer.cpp \
+    src/model/license.cpp \
+    src/model/licensor.cpp \
     src/view/commonwindow.cpp \
     src/DbManager.cpp \
     src/database.cpp \
@@ -20,6 +23,9 @@ SOURCES += \
 
 HEADERS += \
     inc/model/base.h \
+    inc/model/computer.h \
+    inc/model/license.h \
+    inc/model/licensor.h \
     inc/view/commonwindow.h \
     inc/DbManager.h \
     inc/Singleton.h \
@@ -50,4 +56,4 @@ export(copydata.commands)
 QMAKE_EXTRA_TARGETS += first copydata
 
 DISTFILES += \
-    database.conf
+    database.ini

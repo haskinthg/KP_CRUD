@@ -8,24 +8,28 @@
 template <class T>
 class Singleton {
 public:
-    Singleton(T& rObject) {
-
+    Singleton(T& rObject)
+    {
         Instance = &rObject;
     }
-    ~Singleton() {
+    ~Singleton()
+    {
         Instance = 0;
     }
-    static T& instance() {
-        if(!Instance) {
+    static T& instance()
+    {
+        if (!Instance) {
             Instance = new T();
         }
         return (*Instance);
     }
+
 private:
     static T* Instance;
     Singleton(const Singleton& Src);
     Singleton& operator=(const Singleton& Src);
 };
-template <class T> T* Singleton<T>::Instance = 0;
+template <class T>
+T* Singleton<T>::Instance = 0;
 
 #endif // USINGLETON_H

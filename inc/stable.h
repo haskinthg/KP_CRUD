@@ -1,17 +1,18 @@
 #ifndef STABLE_H
 #define STABLE_H
+// Precompiled header
 
+// QT Libs
 #include <QApplication>
-#include <QMainWindow>
-#include <QtGlobal>
-#include <QMessageBox>
-#include <QSqlError>
-#include <QSqlDatabase>
-#include <QSettings>
-#include <QString>
-#include <QSqlQuery>
 #include <QDialog>
+#include <QMainWindow>
+#include <QMessageBox>
+#include <QSettings>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QString>
 #include <QStyle>
-
+#include <QtGlobal>
 
 #endif // STABLE_H

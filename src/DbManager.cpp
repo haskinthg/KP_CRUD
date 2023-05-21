@@ -1,9 +1,9 @@
 #include "DbManager.h"
 #include "database.h"
 
-DbManager::DbManager():Singleton<DbManager>(*this)
+DbManager::DbManager()
+    : Singleton<DbManager>(*this)
 {
-
 }
 
 bool DbManager::connect()

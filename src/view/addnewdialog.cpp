@@ -1,9 +1,9 @@
 #include "addnewdialog.h"
 #include "ui_addnew.h"
 
-AddNewDialog::AddNewDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::AddNewDialog)
+AddNewDialog::AddNewDialog(QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::AddNewDialog)
 {
     ui->setupUi(this);
 }
@@ -22,4 +22,3 @@ void AddNewDialog::on_buttonBox_accepted()
     data.role = ui->role->currentText();
     this->accept();
 }
-

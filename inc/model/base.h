@@ -1,9 +1,7 @@
 #ifndef BASE_H
 #define BASE_H
 
-
-class Base
-{
+class Base {
 public:
     Base();
     long id;

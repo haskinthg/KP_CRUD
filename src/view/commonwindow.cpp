@@ -3,12 +3,12 @@
 
 #include <mainwindow.h>
 
-CommonWindow::CommonWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::CommonWindow)
+CommonWindow::CommonWindow(QWidget* parent)
+    : QMainWindow(parent)
+    , ui(new Ui::CommonWindow)
 {
     ui->setupUi(this);
-    ui->logout->addAction("Выход",this, SLOT(logout()));
+    ui->logout->addAction("Выход", this, SLOT(logout()));
     ui->about->addAction("О программе", this, SLOT(about()));
 }
 
@@ -19,7 +19,7 @@ CommonWindow::~CommonWindow()
 
 void CommonWindow::about()
 {
-    QMessageBox::about(this,"О программе", "Программа создана для учета лицензий программного обеспечения.");
+    QMessageBox::about(this, "О программе", "Программа создана для учета лицензий программного обеспечения.");
 }
 
 void CommonWindow::logout()

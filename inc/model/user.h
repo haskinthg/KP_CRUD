@@ -5,10 +5,9 @@
 
 #include <base.h>
 
-class User: public Base
-{
+class User : public Base {
 public:
-    User() {}
+    User() { }
     QString fname;
     QString lname;
     QString login;
@@ -16,7 +15,7 @@ public:
 
     QString role;
 
-    virtual ~User() {}
+    virtual ~User() { }
 };
 
 #endif // USER_H
