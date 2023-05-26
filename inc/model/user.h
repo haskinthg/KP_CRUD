@@ -8,7 +8,7 @@
 class User : public Base {
 public:
     User() { }
-    User(QString fn, QString ln, QString login, QString role);
+    User(long id, QString fn, QString ln, QString login, QString role);
     QString fname;
     QString lname;
     QString login;

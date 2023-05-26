@@ -33,6 +33,7 @@ private slots:
 
     void on_updateTable_clicked();
 
+
 private:
     Ui::CommonWindow* ui;
     QString tablename;

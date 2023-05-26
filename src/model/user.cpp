@@ -1,7 +1,8 @@
 #include "user.h"
 
-User::User(QString fn, QString ln, QString login, QString role)
+User::User(long id, QString fn, QString ln, QString login, QString role)
 {
+    this->id = id;
     fname = fn;
     lname = ln;
     this-> login = login;

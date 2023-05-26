@@ -28,9 +28,11 @@ void MainWindow::on_login_clicked()
 {
     if (dbManager.login(ui->login_->text(), ui->password->text())) {
         main = new CommonWindow(this, "Лицензии ПО");
+        main->setAttribute(Qt::WA_DeleteOnClose, true);
         main->show();
         ui->login_->setText("");
         ui->password->setText("");
+        QObject::connect(main, SIGNAL(destroyed()) ,this, SLOT(on_destroyed_child()));
         this->hide();
     } else
         QMessageBox::warning(this, "Ошибка", "Неправильный логин или пароль.");
@@ -52,4 +54,10 @@ void MainWindow::on_close_Dialog()
         User usr = dialog->data;
         dbManager.addUser(usr);
     }
+}
+
+void MainWindow::on_destroyed_child()
+{
+    qDebug() << "i'm died!";
+    exit(0);
 }

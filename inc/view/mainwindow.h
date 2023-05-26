@@ -26,6 +26,7 @@ private slots:
     void on_login_clicked();
     void on_registration_clicked();
     void on_close_Dialog();
+    void on_destroyed_child();
 
 private:
     Ui::MainWindow* ui;

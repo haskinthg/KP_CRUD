@@ -12,6 +12,8 @@ CommonWindow::CommonWindow(QWidget* parent, const QString title, const QString t
                 ui->addBtn->setEnabled(false);
                 ui->detBtn->setEnabled(false);
     }
+    qDebug() << User::getAuth().login + " " << User::getAuth().role;
+    if(table == "users") ui->addBtn->setEnabled(false);
 
     this->tablename = table;
     this->setWindowTitle(title);
@@ -127,4 +129,5 @@ void CommonWindow::on_updateTable_clicked()
 {
     this->model->select();
 }
+
 

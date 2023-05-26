@@ -96,7 +96,7 @@ bool Database::login(QString login, QString password)
     query.bindValue(":password", password);
     query.exec();
     query.first();
-    User user(query.value(0).toString(),query.value(1).toString(), query.value(2).toString(), query.value(4).toString());
+    User user(query.value(0).toInt(), query.value(1).toString(),query.value(2).toString(), query.value(3).toString(), query.value(5).toString());
     User::setAuth(user);
     return User::getAuth().login != "";
 }
