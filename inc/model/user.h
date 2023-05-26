@@ -8,6 +8,7 @@
 class User : public Base {
 public:
     User() { }
+    User(QString fn, QString ln, QString login, QString role);
     QString fname;
     QString lname;
     QString login;
@@ -16,6 +17,11 @@ public:
     QString role;
 
     virtual ~User() { }
+    static User getAuth();
+    static void setAuth(const User newAuth);
+
+private:
+    static User auth;
 };
 
 #endif // USER_H

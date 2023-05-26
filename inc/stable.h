@@ -14,5 +14,9 @@
 #include <QString>
 #include <QStyle>
 #include <QtGlobal>
+#include <QDate>
+#include <QSqlRelationalTableModel>
+#include <QObject>
+#include <QSqlRecord>
 
 #endif // STABLE_H

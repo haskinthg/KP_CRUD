@@ -29,11 +29,11 @@ bool Database::createConnection()
 
     db.setDatabaseName(this->dbname);
     if (db.open()) {
-        createTableLicenses();
         createTableUsers();
         createTableComputer();
         createTableLicensor();
         createTableProgram();
+        createTableLicenses();
     } else
         return false;
     return true;
@@ -56,7 +56,10 @@ bool Database::createTableUsers()
 bool Database::createTableLicenses()
 {
     QSqlQuery query(db);
-    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS LICENSES(") + QString("ID SERIAL PRIMARY KEY,") + QString("START_L DATE,") + QString("END_L DATE,") + QString("PRICE INTEGER,") + QString("NAME VARCHAR)"));
+    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS LICENSES(") + QString("ID SERIAL PRIMARY KEY,") + QString("START_L DATE,") + QString("END_L DATE,") + QString("PRICE INTEGER,") + QString("NAME VARCHAR, ") +
+                          QString("COMPUTER_ID INTEGER, FOREIGN KEY (COMPUTER_ID) REFERENCES COMPUTERS(ID) ON DELETE CASCADE, ") +
+                          QString("PROGRAM_ID INTEGER, FOREIGN KEY (PROGRAM_ID) REFERENCES PROGRAMS(ID) ON DELETE CASCADE, ") +
+                          QString("LICENSOR_ID INTEGER, FOREIGN KEY (LICENSOR_ID) REFERENCES LICENSORS(ID) ON DELETE CASCADE)"));
     qDebug() << query.lastError().text();
     return res;
 }
@@ -64,7 +67,7 @@ bool Database::createTableLicenses()
 bool Database::createTableProgram()
 {
     QSqlQuery query(db);
-    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS PROGRAMS(") + QString("ID SERIAL PRIMARY KEY,") + QString("NAME VARCHAR, ") + QString("LIC_ID INTEGER, ") + QString("FOREIGN KEY (LIC_ID) REFERENCES LICENSES(ID) ON DELETE CASCADE)"));
+    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS PROGRAMS(") + QString("ID SERIAL PRIMARY KEY,") + QString("NAME VARCHAR)") );
     qDebug() << query.lastError().text();
     return res;
 }
@@ -72,7 +75,7 @@ bool Database::createTableProgram()
 bool Database::createTableLicensor()
 {
     QSqlQuery query(db);
-    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS LICENSORS(") + QString("ID SERIAL PRIMARY KEY,") + QString("ADDRESS VARCHAR,") + QString("NAME VARCHAR, ") + QString("LIC_ID INTEGER, ") + QString("FOREIGN KEY (LIC_ID) REFERENCES LICENSES(ID) ON DELETE CASCADE)"));
+    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS LICENSORS(") + QString("ID SERIAL PRIMARY KEY,") + QString("ADDRESS VARCHAR,") + QString("NAME VARCHAR)"));
     qDebug() << query.lastError().text();
     return res;
 }
@@ -80,7 +83,7 @@ bool Database::createTableLicensor()
 bool Database::createTableComputer()
 {
     QSqlQuery query(db);
-    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS COMPUTERS(") + QString("ID SERIAL PRIMARY KEY,") + QString("NAME VARCHAR, ") + QString("LIC_ID INTEGER, ") + QString("FOREIGN KEY (LIC_ID) REFERENCES LICENSES(ID) ON DELETE CASCADE)"));
+    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS COMPUTERS(") + QString("ID SERIAL PRIMARY KEY,") + QString("NAME VARCHAR)"));
     qDebug() << query.lastError().text();
     return res;
 }
@@ -88,18 +91,20 @@ bool Database::createTableComputer()
 bool Database::login(QString login, QString password)
 {
     QSqlQuery query(db);
-    query.prepare("SELECT EXISTS (SELECT * FROM USERS WHERE LOGIN = :login AND PASSWORD = :password)");
+    query.prepare("SELECT * FROM USERS WHERE LOGIN = :login AND PASSWORD = :password");
     query.bindValue(":login", login);
     query.bindValue(":password", password);
     query.exec();
-    qDebug() << query.lastError().text();
-    return query.result();
+    query.first();
+    User user(query.value(0).toString(),query.value(1).toString(), query.value(2).toString(), query.value(4).toString());
+    User::setAuth(user);
+    return User::getAuth().login != "";
 }
 
 void Database::addUser(User u)
 {
     QSqlQuery query(db);
-    query.prepare("INSERT INTO USERS(LNAME, FNAME, LOGIN, PASSWORD, UROLE) VALUES (:fn, :ln, :login, :password, :role)");
+    query.prepare("INSERT INTO USERS(LNAME, FNAME, LOGIN, PASSWORD, UROLE) VALUES (:ln, :fn, :login, :password, :role)");
     query.bindValue(":fn", u.fname);
     query.bindValue(":ln", u.lname);
     query.bindValue(":login", u.login);

@@ -27,7 +27,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_login_clicked()
 {
     if (dbManager.login(ui->login_->text(), ui->password->text())) {
-        main = new CommonWindow(this);
+        main = new CommonWindow(this, "Лицензии ПО");
         main->show();
         ui->login_->setText("");
         ui->password->setText("");

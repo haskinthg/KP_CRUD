@@ -13,6 +13,7 @@ SOURCES += \
     src/model/computer.cpp \
     src/model/license.cpp \
     src/model/licensor.cpp \
+    src/model/program.cpp \
     src/view/commonwindow.cpp \
     src/DbManager.cpp \
     src/database.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     inc/model/computer.h \
     inc/model/license.h \
     inc/model/licensor.h \
+    inc/model/program.h \
     inc/view/commonwindow.h \
     inc/DbManager.h \
     inc/Singleton.h \

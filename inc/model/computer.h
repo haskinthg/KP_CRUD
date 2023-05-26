@@ -6,6 +6,7 @@
 class Computer : public Base {
 public:
     Computer();
+    QString name;
 };
 
 #endif // COMPUTER_H

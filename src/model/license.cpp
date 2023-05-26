@@ -1,4 +1,4 @@
-#include "../../inc/model/license.h"
+#include "model/license.h"
 
 License::License()
 {
