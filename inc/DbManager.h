@@ -3,7 +3,6 @@
 
 #include "Singleton.h"
 #include "stable.h"
-
 #include <user.h>
 
 class DbManager : public Singleton<DbManager> {
