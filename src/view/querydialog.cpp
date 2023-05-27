@@ -30,6 +30,7 @@ QueryDialog::QueryDialog(int state, QWidget *parent) :
 
     model->setEditStrategy(QSqlRelationalTableModel::EditStrategy::OnManualSubmit);
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui-> tableView->setSortingEnabled(true);
 }
 
 QueryDialog::~QueryDialog()

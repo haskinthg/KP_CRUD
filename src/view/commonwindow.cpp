@@ -40,6 +40,8 @@ CommonWindow::CommonWindow(QWidget* parent, const QString title, const QString t
                 ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     } else model->setEditStrategy(QSqlRelationalTableModel::OnFieldChange);
     model->select();
+    ui-> tableView->setSortingEnabled(true);
+
 }
 
 CommonWindow::~CommonWindow()
