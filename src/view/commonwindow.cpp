@@ -71,7 +71,7 @@ void CommonWindow::setHeaders()
     } else if (this->tablename == "programs")
         headers << tr("ID") << tr("Название");
     else if (this->tablename == "licensors")
-        headers << tr("ID") << tr("Наименование") << tr("Адрес");
+        headers << tr("ID") << tr("Адрес") << tr("Наименование");
     else if (this->tablename == "computers")
         headers << tr("ID") << tr("Название");
     for(int i = 0, j = 0; i < model->columnCount(); i++, j++)
