@@ -93,7 +93,14 @@
     <addaction name="pos"/>
     <addaction name="pks"/>
    </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Поиск</string>
+    </property>
+    <addaction name="action"/>
+   </widget>
    <addaction name="tables"/>
+   <addaction name="menu"/>
    <addaction name="about"/>
    <addaction name="logout"/>
   </widget>
@@ -116,6 +123,11 @@
   <action name="pks">
    <property name="text">
     <string>Рабочие станции</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Истекшие лицензии</string>
    </property>
   </action>
  </widget>

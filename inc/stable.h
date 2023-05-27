@@ -1,6 +1,6 @@
 #ifndef STABLE_H
 #define STABLE_H
-// Precompiled header
+// Precompiled headers
 
 // QT Libs
 #include <QApplication>

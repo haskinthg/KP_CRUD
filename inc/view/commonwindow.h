@@ -34,6 +34,8 @@ private slots:
     void on_updateTable_clicked();
 
 
+    void on_action_triggered();
+
 private:
     Ui::CommonWindow* ui;
     QString tablename;

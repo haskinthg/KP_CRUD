@@ -2,6 +2,7 @@
 #include "ui_commonwindow.h"
 
 #include <mainwindow.h>
+#include <querydialog.h>
 
 CommonWindow::CommonWindow(QWidget* parent, const QString title, const QString table)
     : QMainWindow(parent)
@@ -87,6 +88,7 @@ void CommonWindow::setRelations()
 void CommonWindow::on_users_triggered()
 {
     CommonWindow* w = new CommonWindow(this, "Пользователи", "users");
+    w->setAttribute(Qt::WA_DeleteOnClose, true);
     w->show();
 }
 
@@ -94,6 +96,7 @@ void CommonWindow::on_users_triggered()
 void CommonWindow::on_licensors_triggered()
 {
     CommonWindow* w = new CommonWindow(this, "Организации", "licensors");
+    w->setAttribute(Qt::WA_DeleteOnClose, true);
     w->show();
 }
 
@@ -101,6 +104,7 @@ void CommonWindow::on_licensors_triggered()
 void CommonWindow::on_pos_triggered()
 {
     CommonWindow* w = new CommonWindow(this, "Программное обеспечение", "programs");
+    w->setAttribute(Qt::WA_DeleteOnClose, true);
     w->show();
 }
 
@@ -108,6 +112,7 @@ void CommonWindow::on_pos_triggered()
 void CommonWindow::on_pks_triggered()
 {
     CommonWindow* w = new CommonWindow(this, "Рабочие станции", "computers");
+    w->setAttribute(Qt::WA_DeleteOnClose, true);
     w->show();
 }
 
@@ -130,4 +135,11 @@ void CommonWindow::on_updateTable_clicked()
     this->model->select();
 }
 
+
+void CommonWindow::on_action_triggered()
+{
+    QueryDialog* w = new QueryDialog(1, this);
+    w->setAttribute(Qt::WA_DeleteOnClose, true);
+    w->show();
+}
 

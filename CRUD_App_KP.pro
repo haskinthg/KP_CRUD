@@ -9,6 +9,7 @@ CONFIG += c++20
 PRECOMPILED_HEADER += inc/stable.h
 
 SOURCES += \
+    src/view/querydialog.cpp \
     src/model/base.cpp \
     src/model/computer.cpp \
     src/model/license.cpp \
@@ -35,12 +36,14 @@ HEADERS += \
     inc/stable.h \
     inc/view/addnewdialog.h \
     inc/view/mainwindow.h \
-    inc/model/user.h
+    inc/model/user.h \
+    inc/view/querydialog.h
 
 FORMS += \
     forms/commonwindow.ui \
     forms/addnew.ui \
-    forms/mainwindow.ui
+    forms/mainwindow.ui \
+    forms/querydialog.ui
 
 INCLUDEPATH +=\
     inc \
@@ -51,11 +54,11 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-copydata.commands = $(COPY_DIR) $$PWD/database.conf $$OUT_PWD
-first.depends = $(first) copydata
-export(first.depends)
-export(copydata.commands)
-QMAKE_EXTRA_TARGETS += first copydata
+#copydata.commands = $(COPY_DIR) $$PWD/database.conf $$OUT_PWD
+#first.depends = $(first) copydata
+#export(first.depends)
+#export(copydata.commands)
+#QMAKE_EXTRA_TARGETS += first copydata
 
 DISTFILES += \
     database.ini

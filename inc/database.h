@@ -20,6 +20,8 @@ public:
     bool login(QString, QString);
     void addUser(User);
 
+    QSqlQuery getQueryEndedLics();
+
     QString lastError();
 
 private:
@@ -30,5 +32,6 @@ private:
     QString username;
     QString password;
 };
+
 
 #endif // DATABASE_H
