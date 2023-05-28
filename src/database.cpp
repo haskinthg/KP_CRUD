@@ -116,7 +116,7 @@ void Database::addUser(User u)
 
 QSqlQuery Database::getQueryEndedLics()
 {
-    return QSqlQuery("SELECT * FROM LICENSES WHERE END_L < NOW()");
+    return QSqlQuery(QString("SELECT LIC.*  FROM LICENSES LIC WHERE END_L < NOW()"));
 }
 
 QString Database::lastError()
