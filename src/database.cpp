@@ -56,10 +56,7 @@ bool Database::createTableUsers()
 bool Database::createTableLicenses()
 {
     QSqlQuery query(db);
-    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS LICENSES(") + QString("ID SERIAL PRIMARY KEY,") + QString("START_L DATE NOT NULL,") + QString("END_L DATE NOT NULL,") + QString("PRICE INTEGER NOT NULL,") + QString("NAME VARCHAR NOT NULL, ") +
-                          QString("COMPUTER_ID INTEGER NOT NULL, FOREIGN KEY (COMPUTER_ID) REFERENCES COMPUTERS(ID) ON DELETE CASCADE, ") +
-                          QString("PROGRAM_ID INTEGER NOT NULL, FOREIGN KEY (PROGRAM_ID) REFERENCES PROGRAMS(ID) ON DELETE CASCADE, ") +
-                          QString("LICENSOR_ID INTEGER NOT NULL, FOREIGN KEY (LICENSOR_ID) REFERENCES LICENSORS(ID) ON DELETE CASCADE)"));
+    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS LICENSES(") + QString("ID SERIAL PRIMARY KEY,") + QString("START_L DATE NOT NULL,") + QString("END_L DATE NOT NULL,") + QString("PRICE INTEGER NOT NULL,") + QString("NAME VARCHAR NOT NULL, ") + QString("COMPUTER_ID INTEGER NOT NULL, FOREIGN KEY (COMPUTER_ID) REFERENCES COMPUTERS(ID) ON DELETE CASCADE, ") + QString("PROGRAM_ID INTEGER NOT NULL, FOREIGN KEY (PROGRAM_ID) REFERENCES PROGRAMS(ID) ON DELETE CASCADE, ") + QString("LICENSOR_ID INTEGER NOT NULL, FOREIGN KEY (LICENSOR_ID) REFERENCES LICENSORS(ID) ON DELETE CASCADE)"));
     qDebug() << query.lastError().text();
     return res;
 }
@@ -67,7 +64,7 @@ bool Database::createTableLicenses()
 bool Database::createTableProgram()
 {
     QSqlQuery query(db);
-    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS PROGRAMS(") + QString("ID SERIAL PRIMARY KEY,") + QString("NAME VARCHAR NOT NULL)") );
+    bool res = query.exec(QString("CREATE TABLE IF NOT EXISTS PROGRAMS(") + QString("ID SERIAL PRIMARY KEY,") + QString("NAME VARCHAR NOT NULL)"));
     qDebug() << query.lastError().text();
     return res;
 }
@@ -96,7 +93,7 @@ bool Database::login(QString login, QString password)
     query.bindValue(":password", password);
     query.exec();
     query.first();
-    User user(query.value(0).toInt(), query.value(1).toString(),query.value(2).toString(), query.value(3).toString(), query.value(5).toString());
+    User user(query.value(0).toInt(), query.value(1).toString(), query.value(2).toString(), query.value(3).toString(), query.value(5).toString());
     User::setAuth(user);
     return User::getAuth().login != "";
 }
@@ -114,9 +111,14 @@ void Database::addUser(User u)
     qDebug() << query.lastError();
 }
 
+// QSqlQuery Database::getQueryEndedLics()
+//{
+//     return QSqlQuery(QString("SELECT LIC.*  FROM LICENSES LIC WHERE END_L < NOW()"));
+// }
+
 QSqlQuery Database::getQueryEndedLics()
 {
-    return QSqlQuery(QString("SELECT LIC.*  FROM LICENSES LIC WHERE END_L < NOW()"));
+    return QSqlQuery(QString("SELECT LIC.ID, LIC.START_L, LIC.END_L, LIC.PRICE, LIC.NAME, COMP.NAME, PROG.NAME, LICR.NAME FROM LICENSES LIC ") + QString("LEFT JOIN COMPUTERS COMP ON LIC.COMPUTER_ID = COMP.ID ") + QString("LEFT JOIN PROGRAMS PROG ON LIC.PROGRAM_ID = PROG.ID ") + QString("LEFT JOIN LICENSORS LICR ON LIC.LICENSOR_ID = LICR.ID WHERE END_L < NOW()"));
 }
 
 QString Database::lastError()
